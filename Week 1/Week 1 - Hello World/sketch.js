@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(1000, 2200);
+  createCanvas(5000, 5000);
 
   // zet color mode naar HSB. dit is voor de tekst in stap een
   colorMode(HSB, 360, 100, 100);
@@ -280,4 +280,17 @@ function draw() {
   square(42, 1890, 40);
   square(402, 1890, 40);
   square(442, 1890, 40);
+  //einde stap zeven
+
+  //start stap acht
+  //stap titel
+  noStroke();
+  fill("#00baba");
+  text("8", 2, 2100);
+
+  //pixel art van de sentry turret uit de Portal games
+
+
+
+
 }
