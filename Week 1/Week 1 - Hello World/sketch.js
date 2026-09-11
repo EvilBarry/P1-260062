@@ -288,7 +288,7 @@ function draw() {
   fill("#00baba");
   text("8", 2, 2100);
 
-  //pixel art van de sentry turret uit de Portal games
+  //pixel art van de 
 
 
 
