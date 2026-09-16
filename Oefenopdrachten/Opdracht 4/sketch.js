@@ -53,7 +53,7 @@ function draw() {
   fill("#19db29")
   circle(35, 310, 20)
   }
-  /** /eightball tekening. maakt gebruik vaan de variabelen "eightball X" en "eightballY"
+  /** /eightball tekening. maakt gebruik vaan de variabelen "eightballX" en "eightballY"
       voor de positie./**/
   fill("#000000")
   circle(eightballX + 360, eightballY + 60, 50)

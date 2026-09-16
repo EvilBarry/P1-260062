@@ -16,6 +16,4 @@ function draw() {
   }
   circle(MovementRight, 200, 50)
   circle(MovementLeft, 600, 50)
-  text(mouseX, 0, 40)
-  text(mouseY, 0, 60)
 }
