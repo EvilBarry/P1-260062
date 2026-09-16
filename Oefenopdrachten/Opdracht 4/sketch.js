@@ -16,7 +16,7 @@ function draw() {
   text("1. Houd B in om een blokje te laten verschijnen.", 20, 20)
   text("2. Druk op spatie om het getal op 0 te zetten.", 20, 120)
   text(counter, 60, 180)
-  text("3. Druk op enter om van rood -> groen -> oranje te gaan.", 20, 240)
+  text("3. Druk op enter om van rood -> oranje -> groen te gaan.", 20, 240)
   text("4. Beweeg de eightball met WASD of de pijltjestoetsen.", 360, 20)
   if(counter >= 500){ //als de teller 500 bereikt, springt hij terug naar 0
     counter = 0
@@ -74,6 +74,18 @@ function draw() {
   }
   if(keyIsDown (68) || keyIsDown (39)){ //als 'd' of pijl naar rechts ingedrukt is, gaat de
     eightballX++                        //waarde van "eightballX" omhoog
+  }
+  if(eightballY >= 380){ //als de waarde van "eightballY" groter is dan 380, springt deze
+    eightballY = 0       //terug naar 0.
+  }
+  if(eightballY <= -105){ //als de waarde van "eightballY" kleiner is dan 105, springt deze
+    eightballY = 0        //terug naar 0.
+  }
+  if(eightballX <= -400){ //als de waarde van "eightballX" kleiner is dan -400, springt deze
+    eightballX = 0        //terug naar 0.
+  }
+   if(eightballX >= 355){ //als de waarde van "eightballX" groter is dan 355, springt deze
+    eightballX = 0        //terug naar 0.
   }
 }
 
