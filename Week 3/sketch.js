@@ -24,6 +24,7 @@ let P2Win = 0
 let P1Score = 0
 let P2Score = 0
 let Restart = 0
+let DrawRestart = 0
 
 function setup() {
   createCanvas(1200, 800);
@@ -32,11 +33,11 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(220)
   fill("#000000")
-  text(P1Score, 950, 400)
-  text("-", 1050, 400)
-  text(P2Score, 1150, 400)
+  text(P1Score, 900, 500)
+  text("-", 950, 500)
+  text(P2Score, 1000, 500)
   square(50, 50, 700, 50)
   fill(SquareA_State)
   square(325, 325, 150)
@@ -175,21 +176,20 @@ function draw() {
             SquareD !== 0 && SquareE !== 0 && SquareF !== 0 && 
             SquareG !== 0 && SquareH !== 0 && SquareI !== 0){
     fill("#414142")
-    text("Draw!", 200, 50)
+    text("Draw!", 900, 50)
+    DrawRestart = 1
   }
 
   if (P1Win == 1){
     fill("#3333ff")
     text("Player 1 won!", 900, 50)
-    P1Score++
   }
   if (P2Win == 1){
     fill("#ff3333")
     text("Player 2 won!", 900, 50)
-    P2Score++
   }
 
-  if (P1Win == 1 || P2Win == 1){
+  if (P1Win == 1 || P2Win == 1 || DrawRestart == 1){
     fill("#535353")
     rect(950, 500, 200, 100)
     fill("#000000")
@@ -270,9 +270,18 @@ function mouseClicked() {
       SquareI = 0
       SquareI_State = "#3b3b3b"
       turn = 0
-      P1Win = 0
-      P2Win = 0
-      Restart = 0 
+      Restart = 0
+      DrawRestart = 0
+      
+      if (P1Win == 1){
+        P1Score++
+        P1Win = 0
+      }
+      
+      if (P2Win == 1){
+        P2Score++
+        P2Win = 0
+      }
       }
     }
     if (turn === 0 && SquareA !== 3 && P1Win !== 1 && P2Win !== 1){
