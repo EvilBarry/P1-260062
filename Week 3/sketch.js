@@ -1,23 +1,36 @@
 //mijn variabelen. "Square[letter]_State" staat voor de kleur van de blokjes. ik had deze beter
 //kunnen benoemen maar dat boeit mij niet.
+let P1ColorPicked = 0
+let P2ColorPicked = 0
+let DefColor = "#353535"
+let DefP1Color = "#101ee0"
+let DefP2Color = "#f41212"
+let P1Color
+let P2Color = DefP2Color
+let XtrColor1 = "#00ff08"
+let XtrColor2 = "#ea00ff"
+let XtrColor3 = "#eaff00"
+let XtrColor4 = "#ff8800"
+let XtrColor5 = "#37b5c6"
+let XtrColor6 = "#3c0d4a"
 let SquareA = 0
-let SquareA_State = "#3b3b3b"
+let SquareA_State = DefColor
 let SquareB = 0
-let SquareB_State = "#3b3b3b"
+let SquareB_State = DefColor
 let SquareC = 0
-let SquareC_State = "#3b3b3b"
+let SquareC_State = DefColor
 let SquareD = 0
-let SquareD_State = "#3b3b3b"
+let SquareD_State = DefColor
 let SquareE = 0
-let SquareE_State = "#3b3b3b"
+let SquareE_State = DefColor
 let SquareF = 0
-let SquareF_State = "#3b3b3b"
+let SquareF_State = DefColor
 let SquareG = 0
-let SquareG_State = "#3b3b3b"
+let SquareG_State = DefColor
 let SquareH = 0
-let SquareH_State = "#3b3b3b"
+let SquareH_State = DefColor
 let SquareI = 0
-let SquareI_State = "#3b3b3b"
+let SquareI_State = DefColor
 let turn = 0
 let P1Win = 0
 let P2Win = 0
@@ -25,119 +38,182 @@ let P1Score = 0
 let P2Score = 0
 let Restart = 0
 let DrawRestart = 0
+let SquareLocationX = 325
+let SquareLocationY = 325
+let SquareSize = 150
 
 function setup() {
-  createCanvas(1200, 800);
+  createCanvas(1200, 800)
   textSize(50)
   noStroke()
 }
 
 function draw() {
   background(220)
+
+  if (P1ColorPicked == 0){
+    P1Color = DefP1Color
+  }
+  if (P1ColorPicked == 1){
+    P1Color = XtrColor1
+  }
+  if (P1ColorPicked == 2){
+    P1Color = XtrColor2
+  }
+  if (P1ColorPicked == 3){
+    P1Color = XtrColor3
+  }
+  if (P2ColorPicked == 0){
+    P2Color = DefP2Color
+  }
+  if (P2ColorPicked == 1){
+    P2Color = XtrColor4
+  }
+  if (P2ColorPicked == 2){
+    P2Color = XtrColor5
+  }
+  if (P2ColorPicked == 3){
+    P2Color = XtrColor6
+  }
+  
+  if (turn == 0){
+    background(P2Color)
+  }else {
+    background(P1Color)
+  }
+
+  if (P1Win == 1 || P2Win == 1 || DrawRestart == 1){
+    background("#666464")
+    fill("#535353")
+    rect(950, 500, 200, 100)
+    fill("#000000")
+    text("restart", 1000, 550)
+    Restart = 1
+  }
+
   fill("#000000")
-  text(P1Score, 900, 500)
-  text("-", 950, 500)
-  text(P2Score, 1000, 500)
+  text(P1Score, 1000, 100)
+  text("-", 1050, 100)
+  text(P2Score, 1100, 100)
+  text("Player 1 Color", 850, 150)
+  text("Player 2 Color", 850, 300)
   square(50, 50, 700, 50)
+  square(1060, 180, 60, 10)
+  square(1060, 330, 60, 10)
+  fill("#ffffff")
+  text("D", 1070, 225)
+  text("D", 1070, 375)
+  fill(XtrColor1)
+  square(850, 180, 60, 10)
+  fill(XtrColor2)
+  square(920, 180, 60, 10)
+  fill(XtrColor3)
+  square(990, 180, 60, 10)
+  fill(XtrColor4)
+  square(850, 330, 60, 10)
+  fill(XtrColor5)
+  square(920, 330, 60, 10)
+  fill(XtrColor6)
+  square(990, 330, 60, 10)
   fill(SquareA_State)
-  square(325, 325, 150)
+  square(SquareLocationX, SquareLocationY, SquareSize)
   fill(SquareB_State)
-  square(325, 525, 150)
+  square(SquareLocationX, SquareLocationY + 200, SquareSize)
   fill(SquareC_State)
-  square(325, 125, 150)
+  square(SquareLocationX, SquareLocationY - 200, SquareSize)
   fill(SquareD_State)
-  square(125, 325, 150)
+  square(SquareLocationX - 200, SquareLocationY, SquareSize)
   fill(SquareE_State)
-  square(525, 325, 150)
+  square(SquareLocationX + 200, SquareLocationY, SquareSize)
   fill(SquareF_State)
-  square(525, 525, 150)
+  square(SquareLocationX + 200, SquareLocationY + 200, SquareSize)
   fill(SquareG_State)
-  square(125, 525, 150)
+  square(SquareLocationX - 200, SquareLocationY + 200, SquareSize)
   fill(SquareH_State)
-  square(125, 125, 150)
+  square(SquareLocationX - 200, SquareLocationY - 200, SquareSize)
   fill(SquareI_State)
-  square(525, 125, 150)
+  square(SquareLocationX + 200, SquareLocationY - 200, SquareSize)
 
   if (SquareA == 0){
-    SquareA_State = "#3b3b3b"
+    SquareA_State = DefColor
   }
   if (SquareA == 2){
-    SquareA_State = "#2a06f3"
+    SquareA_State = P1Color
   }
   if (SquareA == 3){
-    SquareA_State = "#ff1900"
+    SquareA_State = P2Color
   }
   if (SquareB == 0){
-    SquareB_State = "#3b3b3b"
+    SquareB_State = DefColor
   }
   if (SquareB == 2){
-    SquareB_State = "#2a06f3"
+    SquareB_State = P1Color
   }
   if (SquareB == 3){
-    SquareB_State = "#ff1900"
+    SquareB_State = P2Color
   }
   if (SquareC == 0){
-    SquareC_State = "#3b3b3b"
+    SquareC_State = DefColor
   }
   if (SquareC == 2){
-    SquareC_State = "#2a06f3"
+    SquareC_State = P1Color
   }
   if (SquareC == 3){
-    SquareC_State = "#ff1900"
+    SquareC_State = P2Color
   }
   if (SquareD == 0){
-    SquareD_State = "#3b3b3b"
+    SquareD_State = DefColor
   }
   if (SquareD == 2){
-    SquareD_State = "#2a06f3"
+    SquareD_State = P1Color
   }
   if (SquareD == 3){
-    SquareD_State = "#ff1900"
+    SquareD_State = P2Color
   }
   if (SquareE == 0){
-    SquareE_State = "#3b3b3b"
+    SquareE_State = DefColor
   }
   if (SquareE == 2){
-    SquareE_State = "#2a06f3"
+    SquareE_State = P1Color
   }
   if (SquareE == 3){
-    SquareE_State = "#ff1900"
+    SquareE_State = P2Color
   }
   if (SquareF == 0){
-    SquareF_State = "#3b3b3b"
+    SquareF_State = DefColor
   }
   if (SquareF == 2){
-    SquareF_State = "#2a06f3"
+    SquareF_State = P1Color
   }
   if (SquareF == 3){
-    SquareF_State = "#ff1900"
+    SquareF_State = P2Color
   }
   if (SquareG == 0){
-    SquareG_State = "#3b3b3b"
+    SquareG_State = DefColor
   }
   if (SquareG == 2){
-    SquareG_State = "#2a06f3"
+    SquareG_State = P1Color
   }
   if (SquareG == 3){
-    SquareG_State = "#ff1900"
+    SquareG_State = P2Color
   }
   if (SquareH == 0){
-    SquareH_State = "#3b3b3b"
+    SquareH_State = DefColor
   }
   if (SquareH == 2){
-    SquareH_State = "#2a06f3"
+    SquareH_State = P1Color
   }
   if (SquareH == 3){
-    SquareH_State = "#ff1900"
+    SquareH_State = P2Color
   }
   if (SquareI == 0){
-    SquareI_State = "#3b3b3b"
+    SquareI_State = DefColor
   }
   if (SquareI == 2){
-    SquareI_State = "#2a06f3"
+    SquareI_State = P1Color
   }
   if (SquareI == 3){
-    SquareI_State = "#ff1900"
+    SquareI_State = P2Color
   }
 
   if (SquareA == 2 && SquareB == 2 && SquareC == 2){
@@ -181,67 +257,59 @@ function draw() {
   }
 
   if (P1Win == 1){
-    fill("#3333ff")
+    fill(P1Color)
     text("Player 1 won!", 900, 50)
   }
   if (P2Win == 1){
-    fill("#ff3333")
+    fill(P2Color)
     text("Player 2 won!", 900, 50)
-  }
-
-  if (P1Win == 1 || P2Win == 1 || DrawRestart == 1){
-    fill("#535353")
-    rect(950, 500, 200, 100)
-    fill("#000000")
-    text("restart", 1000, 550)
-    Restart = 1
   }
 
   if (mouseX >= 325 && mouseX <= 475 && mouseY >= 325
       && mouseY <= 475 && SquareA !== 2 && SquareA !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(325, 325, 150)
+  square(SquareLocationX, SquareLocationY, SquareSize)
   }else if (mouseX >= 325 && mouseX <= 475 && mouseY >= 525
             && mouseY <= 675 && SquareB !== 2 && SquareB !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(325, 525, 150)
+  square(SquareLocationX, SquareLocationY + 200, SquareSize)
   }else if (mouseX >= 325 && mouseX <= 475 && mouseY >= 125
             && mouseY <= 275 && SquareC !== 2 && SquareC !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(325, 125, 150)
+  square(SquareLocationX, SquareLocationY - 200, SquareSize)
   }else if (mouseX >= 125 && mouseX <= 275 && mouseY >= 325
             && mouseY <= 475 && SquareD !== 2 && SquareD !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(125, 325, 150)
+  square(SquareLocationX - 200, SquareLocationY, SquareSize)
   }else if (mouseX >= 525 && mouseX <= 675 && mouseY >= 325
             && mouseY <= 475 && SquareE !== 2 && SquareE !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(525, 325, 150)
+  square(SquareLocationX + 200, SquareLocationY, SquareSize)
   }else if (mouseX >= 525 && mouseX <= 675 && mouseY >= 525
             && mouseY <= 675 && SquareF !== 2 && SquareF !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(525, 525, 150)
+  square(SquareLocationX + 200, SquareLocationY + 200, SquareSize)
   }else if (mouseX >= 125 && mouseX <= 275 && mouseY >= 525
             && mouseY <= 675 && SquareG !== 2 && SquareG !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(125, 525, 150)
+  square(SquareLocationX - 200, SquareLocationY + 200, SquareSize)
   }else if (mouseX >= 125 && mouseX <= 275 && mouseY >= 125
             && mouseY <= 275 && SquareH !== 2 && SquareH !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(125, 125, 150)
+  square(SquareLocationX - 200, SquareLocationY - 200, SquareSize)
   }else if (mouseX >= 525 && mouseX <= 675 && mouseY >= 125
             && mouseY <= 275 && SquareI !== 2 && SquareI !== 3
             && P1Win !== 1 && P2Win !== 1){
   fill("#ffffff")
-  square(525, 125, 150)
+  square(SquareLocationX + 200, SquareLocationY - 200, SquareSize)
   }else {
     noFill()
   }
@@ -249,26 +317,50 @@ function draw() {
 
 function mouseClicked() {
     if (mouseButton === LEFT){
+      if (mouseX >= 1060 && mouseX <= 1120 && mouseY >= 180 && mouseY <= 240){
+        P1ColorPicked = 0
+      }
+      if (mouseX >= 850 && mouseX <= 910 && mouseY >= 180 && mouseY <= 240){
+        P1ColorPicked = 1
+      }
+      if (mouseX >= 920 && mouseX <= 980 && mouseY >= 180 && mouseY <= 240){
+        P1ColorPicked = 2
+      }
+      if (mouseX >= 990 && mouseX <= 1050 && mouseY >= 180 && mouseY <= 240){
+        P1ColorPicked = 3
+      }
+      if (mouseX >= 1060 && mouseX <= 1120 && mouseY >= 330 && mouseY <= 390){
+        P2ColorPicked = 0
+      }
+      if (mouseX >= 850 && mouseX <= 910 && mouseY >= 330 && mouseY <= 390){
+        P2ColorPicked = 1
+      }
+      if (mouseX >= 920 && mouseX <= 980 && mouseY >= 330 && mouseY <= 390){
+        P2ColorPicked = 2
+      }
+      if (mouseX >= 990 && mouseX <= 1050 && mouseY >= 330 && mouseY <= 390){
+        P2ColorPicked = 3
+      }
     if (Restart == 1){
       if (mouseX >= 950 && mouseX <= 1150 && mouseY >= 500 && mouseY <= 600){
       SquareA = 0
-      SquareA_State = "#3b3b3b"
+      SquareA_State = DefColor
       SquareB = 0
-      SquareB_State = "#3b3b3b"
+      SquareB_State = DefColor
       SquareC = 0
-      SquareC_State = "#3b3b3b"
+      SquareC_State = DefColor
       SquareD = 0
-      SquareD_State = "#3b3b3b"
+      SquareD_State = DefColor
       SquareE = 0
-      SquareE_State = "#3b3b3b"
+      SquareE_State = DefColor
       SquareF = 0
-      SquareF_State = "#3b3b3b"
+      SquareF_State = DefColor
       SquareG = 0
-      SquareG_State = "#3b3b3b"
+      SquareG_State = DefColor
       SquareH = 0
-      SquareH_State = "#3b3b3b"
+      SquareH_State = DefColor
       SquareI = 0
-      SquareI_State = "#3b3b3b"
+      SquareI_State = DefColor
       turn = 0
       Restart = 0
       DrawRestart = 0
