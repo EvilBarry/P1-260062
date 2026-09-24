@@ -51,6 +51,8 @@ function setup() {
 function draw() {
   background(220)
 
+  //als de kleurknoppen worden ingedrukt, verandert de waarde van P1ColorPicker of P2ColorPicked. de waardes hiervan bepalen
+  //dan ook de kleur van de spelers.
   if (P1ColorPicked == 0){
     P1Color = DefP1Color
   }
@@ -76,12 +78,17 @@ function draw() {
     P2Color = XtrColor6
   }
   
+
+  //turn wordt hier gebruikt om de beurt van de spelers te bepalen. de achtergrondkleur wordt hier bepaald gebasseerd op de
+  //beurten.
   if (turn == 0){
     background(P2Color)
   }else {
     background(P1Color)
   }
 
+  //als een speler wint, of het gelijkspel is, en het spel is al beeindigd, verandert de achtergrond kleur naar grijs en wordt de
+  //herstart knop zichtbaar.
   if (P1Win == 1 || P2Win == 1 || DrawRestart == 1){
     background("#666464")
     fill("#535353")
@@ -91,6 +98,7 @@ function draw() {
     Restart = 1
   }
 
+  //hier wordt alles getekend.
   fill("#000000")
   text(P1Score, 1000, 100)
   text("-", 1050, 100)
@@ -134,6 +142,7 @@ function draw() {
   fill(SquareI_State)
   square(SquareLocationX + 200, SquareLocationY - 200, SquareSize)
 
+  //hier worden de kleuren van de blokjes bepaald gebasseerd op de staat van het blokje
   if (SquareA == 0){
     SquareA_State = DefColor
   }
@@ -216,6 +225,7 @@ function draw() {
     SquareI_State = P2Color
   }
 
+  //win condities. deze bepalen welk variabel naar 1 moet springen gebasseert op wie wint/gelijkspel.
   if (SquareA == 2 && SquareB == 2 && SquareC == 2){
     P1Win = 1
   }else if (SquareA == 2 && SquareD == 2 && SquareE == 2){
@@ -265,6 +275,7 @@ function draw() {
     text("Player 2 won!", 900, 50)
   }
 
+  //mijn "hover" effect. deze checkt of het blokje niet al ingekleurd is en of het spel nog niet beeindigd is.
   if (mouseX >= 325 && mouseX <= 475 && mouseY >= 325
       && mouseY <= 475 && SquareA !== 2 && SquareA !== 3
             && P1Win !== 1 && P2Win !== 1){
@@ -316,6 +327,7 @@ function draw() {
 }
 
 function mouseClicked() {
+    //input detectie. hier wordt bepaald wat eider blokje en knop doet in welke scenario.
     if (mouseButton === LEFT){
       if (mouseX >= 1060 && mouseX <= 1120 && mouseY >= 180 && mouseY <= 240){
         P1ColorPicked = 0
